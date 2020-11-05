@@ -1,5 +1,5 @@
 let fruits = [];
-let score =0;
+let score = 0;
 
 class Game {
   constructor() {}
@@ -19,22 +19,23 @@ class Game {
     this.player = new Player(this.playerImage);
     // this.background = this.farmImage;
     this.obstacles = [];
-    let hamster = createSprite(width/2, height/2, 50, 50);
+    let hamster = createSprite(width / 2, height / 2, 50, 50);
     this.hamster = hamster;
     this.hamster.addImage(this.hamsterImage50);
     this.hamster.height = 50;
     this.hamster.width = 50;
-    
+
   }
 
   drawGame() {
     // console.log("this is the game draw");
-    background(this.backgroundImage);//!
+    background(this.backgroundImage); //!
     this.player.drawPlayer();
     if (frameCount % 80 === 0) {
       console.log("this will be the push event");
       this.obstacles.push(new Obstacle(this.coinImage));
       this.makeSeeds();
+      this.checkSeeds();
     }
 
     this.obstacles.forEach(function (obstacle) {
@@ -48,46 +49,80 @@ class Game {
         return true;
       }
     });
-        // * SCORE * //
-        score = this.hamster.width-44; //tba -50 instead of 44
-        strokeWeight(0);
-        fill("#233C2B");
-        rect(12,12,200,50,10,10,10,10);
-        fill(255,255,255);
-        textSize(25);
-        text(`Nom-Score: ${score}`,20,45);
-        // * Ende Score * ///
+    // * SCORE * //
+    score = this.hamster.width - 44; //tba -50 instead of 44
+    strokeWeight(0);
+    fill("#233C2B");
+    rect(12, 12, 200, 50, 10, 10, 10, 10);
+    fill(255, 255, 255);
+    textSize(25);
+    text(`Nom-Score: ${score}`, 20, 45);
+    // * Ende Score * ///
     // define the obstacle drawing logic + add a new obstacle to  the array in the constructor with the image passed into it
   }
-  makeSeeds() {
+makeSeeds() {
     console.log("this would be a seed")
     if (fruits.length < 4) {
-      let fruit = createSprite(mouseX, mouseY, 50, 50);// tbd change to random
+      let fruit = createSprite(mouseX, mouseY, 50, 50); // tbd change to random
       fruit.bonus = 22; // tbd set image 
       fruit.addImage(this.seedImage);
-      fruits.push(fruit); 
-    // fruits.push()(createSprite(mouseX, mouseY, 30, 30)); 
-  }
-
-  //if no image or animation is associated it will be a rectancle of the specified size
-  //and a random color
-
-  //now you can use the variable to set properties
-  //e.g. a random velocity on the x and y coordinates
-  // s.velocity.x = random(-5, 5);
-  // s.velocity.y = random(-5, 5);
-  console.log("fruits Array now", fruits);
-  }
-
-  // * WIN & LOSE * //
-  // tbd: add pop-up
-  win () {
-    if (this.hamster.width > 400) {
-    console.log("You've won! Go on and nom some more!"); 
+      fruits.push(fruit);
+      // fruits.push()(createSprite(mouseX, mouseY, 30, 30)); 
     }
   }
-  // loose () {
-  //   if (hamster collided with enemy)
-  //   console.log("Oh noes, that was scaryy! And so close! You run away and leave all your seeds behind.")
-  // }
-}
+
+  checkSeeds() {
+    fruits.forEach((element) => {
+      console.log("this is the checkSeed", element)
+      if (this.hamster.collide(element)) {
+        console.log("it's collided")
+      }
+      else {
+        console.log("it didn't collide");
+      }
+    
+    }
+    
+    )
+  }
+} // end of draw
+// // !!! 
+// tbd: put this all into a filter 
+// checkSeeds() {
+//   fruits.forEach((element) => {
+//     console.log(element);
+//   //   if (this.hamster.collide(element)) {
+//   //     return false;
+//   //   } else {
+//   //     console.log("it collided");
+//   //     score += 10;
+//   //     // tbd: increase hamster size
+//   //     // game.hamster.width+= Math.sqrt(element.width*element.height+this.hamster.width*this.hamster.height)
+//   //     consolelog("updated score", score);
+//   //     return true; 
+//   //   }
+//   }
+//   )
+// }
+
+// //if no image or animation is associated it will be a rectancle of the specified size
+// //and a random color
+
+// //now you can use the variable to set properties
+// //e.g. a random velocity on the x and y coordinates
+// // s.velocity.x = random(-5, 5);
+// // s.velocity.y = random(-5, 5);
+// console.log("fruits Array now", fruits);
+// }
+
+// * WIN & LOSE * //
+// tbd: add pop-up
+// win () {
+//   if (this.hamster.width > 400) {
+//   console.log("You've won! Go on and nom some more!"); 
+//   }
+// }
+// loose () {
+//   if (hamster collided with enemy)
+//   console.log("Oh noes, that was scaryy! And so close! You run away and leave all your seeds behind.")
+// }
