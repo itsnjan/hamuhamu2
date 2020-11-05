@@ -9,6 +9,7 @@ class Game {
     this.coinImage = loadImage("../assets/coins/tile000.png");
     this.backgroundImage = loadImage("../assets/farm3.png");
     this.seedImage = loadImage("../assets/seed-50x50.png")
+    this.hamsterImage50 = loadImage("../assets/hamster-gray-50.png");
   }
   setupGame() {
     console.log("this is the game setup");
@@ -22,6 +23,7 @@ class Game {
     this.hamster = hamster;
     this.hamster.height = 50;
     this.hamster.width = 50;
+    this.hamster.addImage(this.hamsterImage50);
   }
 
   drawGame() {
@@ -58,8 +60,12 @@ class Game {
   }
   makeSeeds() {
     console.log("this would be a seed")
-    if (fruits.length <= 3) {
-    fruits.push(createSprite(mouseX, mouseY, 30, 30)); 
+    if (fruits.length < 4) {
+      let fruit = createSprite(mouseX, mouseY, 50, 50);// tbd change to random
+      fruit.bonus = 22; // tbd set image 
+      fruit.addImage(this.seedImage);
+      fruits.push(fruit); 
+    // fruits.push()(createSprite(mouseX, mouseY, 30, 30)); 
   }
 
   //if no image or animation is associated it will be a rectancle of the specified size
@@ -71,6 +77,9 @@ class Game {
   // s.velocity.y = random(-5, 5);
   console.log("fruits Array now", fruits);
   }
+
+  // * WIN & LOSE * //
+  // tbd: add pop-up
   win () {
     if (this.hamster.width > 400) {
     console.log("You've won! Go on and nom some more!"); 

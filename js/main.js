@@ -10,6 +10,10 @@ function setup() {
 function draw() {
   clear();
   game.drawGame();
+  drawSprites();
+game.hamster.position.x = mouseX; //tbd: maybe this could be put into game.js?
+game.hamster.position.y = mouseY;
+
 }
 
 // add the jump function here:

@@ -16,6 +16,9 @@ class Obstacle {
     let playerX = playerInfo.x + playerInfo.width / 2;
     let playerY = playerInfo.y + playerInfo.height / 2;
 
+    // CHANGES TBD:
+    // a) change this into a play.js-function which checks for collide
+    // b) probably move it from obstacle.js to game.js
     if (dist(obstacleX, obstacleY, playerX, playerY) > 25) {
       return false;
     } else {
