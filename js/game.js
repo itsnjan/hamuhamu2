@@ -21,9 +21,10 @@ class Game {
     this.obstacles = [];
     let hamster = createSprite(width/2, height/2, 50, 50);
     this.hamster = hamster;
+    this.hamster.addImage(this.hamsterImage50);
     this.hamster.height = 50;
     this.hamster.width = 50;
-    this.hamster.addImage(this.hamsterImage50);
+    
   }
 
   drawGame() {
