@@ -65,7 +65,7 @@ class Game {
   makeSeeds() {
     console.log("this would be a seed")
     if (fruits.length < 4) {
-      let fruit = createSprite(mouseX, mouseY, 40, 40); // tbd change to random
+      let fruit = createSprite(Math.round(random(width)), Math.round(random(height)), 50, 50);
       fruit.bonus = 22; // tbd set image 
       fruit.addImage(this.seedImage);
       fruits.push(fruit);
@@ -85,10 +85,11 @@ class Game {
          this.hamster.width = this.hamster.height;
          this.hamsterImage50.resize(this.hamster.height,this.hamster.width)
          console.log("new area sqrt",areaSqrt);
+         //tbd: remove element
+         element.remove();
         } else {
           console.log("it didn't collide");
         }
-
       }
     )
   } // end check checkSeeds()
