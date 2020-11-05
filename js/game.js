@@ -1,3 +1,5 @@
+let fruits = [];
+
 class Game {
   constructor() {}
   preloadGame() {
@@ -11,7 +13,8 @@ class Game {
     // ];
     this.playerImage = loadImage("../assets/player/bb8.gif");
     this.coinImage = loadImage("../assets/coins/tile000.png");
-    // this.backgroundImage = loadImage("../assets/farm3.png");
+    this.backgroundImage = loadImage("../assets/farm3.png");
+    this.seedImage = loadImage("../assets/seed-50x50.png")
   }
   setupGame() {
     console.log("this is the game setup");
@@ -28,10 +31,10 @@ class Game {
     // console.log("this is the game draw");
     // this.background = this.farmImage;
     this.player.drawPlayer();
-    if (frameCount % 180 === 0) {
+    if (frameCount % 80 === 0) {
       console.log("this will be the push event");
       this.obstacles.push(new Obstacle(this.coinImage));
-      console.log(this.obstacles);
+      this.makeSeeds();
     }
 
     this.obstacles.forEach(function (obstacle) {
@@ -48,6 +51,16 @@ class Game {
     // define the obstacle drawing logic + add a new obstacle to  the array in the constructor with the image passed into it
   }
   makeSeeds() {
+    console.log("this would be a seed")
+    if (fruits.length <= 3) {
+    fruits.push(createSprite(mouseX, mouseY, 30, 30)); }
+  //if no image or animation is associated it will be a rectancle of the specified size
+  //and a random color
 
+  //now you can use the variable to set properties
+  //e.g. a random velocity on the x and y coordinates
+  // s.velocity.x = random(-5, 5);
+  // s.velocity.y = random(-5, 5);
+  console.log("fruits Array now", fruits);
   }
 }

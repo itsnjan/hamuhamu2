@@ -2,7 +2,6 @@ const game = new Game();
 
 function preload() {
   game.preloadGame();
-  backgroundPic = loadImage("../assets/farm3.png");
 }
 function setup() {
   createCanvas(1244, 700);
@@ -10,7 +9,7 @@ function setup() {
 }
 function draw() {
   clear();
-  background(backgroundPic);
+  background(game.backgroundImage); //!
   game.drawGame();
 }
 
