@@ -32,7 +32,7 @@ class Game {
     this.hamster.width = 50;
     this.hamster.area = (this.hamster.height * this.hamster.width);
     this.hamster.areaSqrt = Math.sqrt(this.hamster.area)
-
+this.winning = false;
   }
 
   drawGame() {
