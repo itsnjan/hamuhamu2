@@ -1,16 +1,10 @@
 let fruits = [];
+let score =0;
 
 class Game {
   constructor() {}
   preloadGame() {
     console.log("this is the game preload");
-    // this.backgroundImages = [
-    //   { src: loadImage("../assets/background/plx-1.png"), x: 0, speed: 0 },
-    //   { src: loadImage("../assets/background/plx-2.png"), x: 0, speed: 1 },
-    //   { src: loadImage("../assets/background/plx-3.png"), x: 0, speed: 2 },
-    //   { src: loadImage("../assets/background/plx-4.png"), x: 0, speed: 3 },
-    //   { src: loadImage("../assets/background/plx-5.png"), x: 0, speed: 4 },
-    // ];
     this.playerImage = loadImage("../assets/player/bb8.gif");
     this.coinImage = loadImage("../assets/coins/tile000.png");
     this.backgroundImage = loadImage("../assets/farm3.png");
@@ -18,18 +12,21 @@ class Game {
   }
   setupGame() {
     console.log("this is the game setup");
-    // backgroundImage = game.backgroundImage;
     //  initialize background + player here
     // NB: we DON'T initialize the coins here because we create them dynamically in the draw
     // this.background = new Background(this.backgroundImages);
     this.player = new Player(this.playerImage);
     // this.background = this.farmImage;
     this.obstacles = [];
+    let hamster = createSprite(width/2, height/2, 50, 50);
+    this.hamster = hamster;
+    this.hamster.height = 50;
+    this.hamster.width = 50;
   }
 
   drawGame() {
     // console.log("this is the game draw");
-    // this.background = this.farmImage;
+    background(this.backgroundImage);//!
     this.player.drawPlayer();
     if (frameCount % 80 === 0) {
       console.log("this will be the push event");
@@ -48,12 +45,23 @@ class Game {
         return true;
       }
     });
+        // * SCORE * //
+        score = this.hamster.width-44; //tba -50 instead of 44
+        strokeWeight(0);
+        fill("#233C2B");
+        rect(12,12,200,50,10,10,10,10);
+        fill(255,255,255);
+        textSize(25);
+        text(`Nom-Score: ${score}`,20,45);
+        // * Ende Score * ///
     // define the obstacle drawing logic + add a new obstacle to  the array in the constructor with the image passed into it
   }
   makeSeeds() {
     console.log("this would be a seed")
     if (fruits.length <= 3) {
-    fruits.push(createSprite(mouseX, mouseY, 30, 30)); }
+    fruits.push(createSprite(mouseX, mouseY, 30, 30)); 
+  }
+
   //if no image or animation is associated it will be a rectancle of the specified size
   //and a random color
 
@@ -63,4 +71,13 @@ class Game {
   // s.velocity.y = random(-5, 5);
   console.log("fruits Array now", fruits);
   }
+  win () {
+    if (this.hamster.width > 400) {
+    console.log("You've won! Go on and nom some more!"); 
+    }
+  }
+  // loose () {
+  //   if (hamster collided with enemy)
+  //   console.log("Oh noes, that was scaryy! And so close! You run away and leave all your seeds behind.")
+  // }
 }

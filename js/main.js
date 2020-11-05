@@ -9,7 +9,6 @@ function setup() {
 }
 function draw() {
   clear();
-  background(game.backgroundImage); //!
   game.drawGame();
 }
 
