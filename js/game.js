@@ -24,6 +24,8 @@ class Game {
     this.hamster.addImage(this.hamsterImage50);
     this.hamster.height = 50;
     this.hamster.width = 50;
+    this.hamster.area = (this.hamster.height*this.hamster.width);
+    this.hamster.areaSqrt = Math.sqrt(this.hamster.area)
 
   }
 
@@ -63,7 +65,7 @@ class Game {
   makeSeeds() {
     console.log("this would be a seed")
     if (fruits.length < 4) {
-      let fruit = createSprite(mouseX, mouseY, 50, 50); // tbd change to random
+      let fruit = createSprite(mouseX, mouseY, 40, 40); // tbd change to random
       fruit.bonus = 22; // tbd set image 
       fruit.addImage(this.seedImage);
       fruits.push(fruit);
@@ -78,8 +80,11 @@ class Game {
           console.log("it's collided");
           // adjust hamster size
           // tbd: put in external function
-         console.log("element.width", element.width,element.height);
-          console.log("game.hamster.width+=", Math.sqrt((element.width*element.height)+(this.hamster.width*this.hamster.height)));
+         let areaSqrt = (Math.round(Math.sqrt((element.width*element.height)+(this.hamster.width*this.hamster.height))));
+         this.hamster.height = areaSqrt;
+         this.hamster.width = this.hamster.height;
+         this.hamsterImage50.resize(this.hamster.height,this.hamster.width)
+         console.log("new area sqrt",areaSqrt);
         } else {
           console.log("it didn't collide");
         }
