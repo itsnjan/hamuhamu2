@@ -1,5 +1,7 @@
 let fruits = [];
 let score = 0;
+// let seeds;
+// let enemies;
 
 class Game {
   constructor() {}
@@ -24,7 +26,7 @@ class Game {
     this.hamster.addImage(this.hamsterImage50);
     this.hamster.height = 50;
     this.hamster.width = 50;
-    this.hamster.area = (this.hamster.height*this.hamster.width);
+    this.hamster.area = (this.hamster.height * this.hamster.width);
     this.hamster.areaSqrt = Math.sqrt(this.hamster.area)
 
   }
@@ -61,39 +63,45 @@ class Game {
     text(`Nom-Score: ${score}`, 20, 45);
     // * Ende Score * ///
     // define the obstacle drawing logic + add a new obstacle to  the array in the constructor with the image passed into it
-  }// End of game.draw()
+  } // End of game.draw()
   makeSeeds() {
     console.log("this would be a seed")
     if (fruits.length < 4) {
       let fruit = createSprite(Math.round(random(width)), Math.round(random(height)), 50, 50);
-      fruit.bonus = 22; // tbd set image 
+      fruit.bonus = 22;
       fruit.addImage(this.seedImage);
       fruits.push(fruit);
       // fruits.push()(createSprite(mouseX, mouseY, 30, 30)); 
     }
-  }//end makeSeeds()
+  } //end makeSeeds()
 
   checkSeeds() {
-    fruits.forEach((element) => {
+    fruits = fruits.filter((element) => {
+      // fruits.forEach((element) => {
         console.log("this is the checkSeed", element)
         if (this.hamster.collide(element)) {
           console.log("it's collided");
           // adjust hamster size
           // tbd: put in external function
-         let areaSqrt = (Math.round(Math.sqrt((element.width*element.height)+(this.hamster.width*this.hamster.height))));
-         this.hamster.height = areaSqrt;
-         this.hamster.width = this.hamster.height;
-         this.hamsterImage50.resize(this.hamster.height,this.hamster.width)
-         console.log("new area sqrt",areaSqrt);
-         //tbd: remove element
-         element.remove();
+          let areaSqrt = (Math.round(Math.sqrt((element.width * element.height) + (this.hamster.width * this.hamster.height))));
+          this.hamster.height = areaSqrt;
+          this.hamster.width = this.hamster.height;
+          this.hamsterImage50.resize(this.hamster.height, this.hamster.width)
+          console.log("new area sqrt", areaSqrt);
+          element.remove();
+          return false;
+          
         } else {
           console.log("it didn't collide");
+          return true;
         }
-      }
-    )
+      // }) // end fruits.end forEach
+    })
   } // end check checkSeeds()
 } // end of draw
+
+
+
 // // !!! 
 // tbd: put this all into a filter 
 // checkSeeds() {
