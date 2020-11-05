@@ -1,11 +1,13 @@
 let fruits = [];
-let enemies = [];
+
 let score = 0;
 // let seeds;
 // let enemies;
 
 class Game {
-  constructor() {}
+  constructor() {
+   this.enemies = [];
+  }
   preloadGame() {
     console.log("this is the game preload");
     this.playerImage = loadImage("./assets/player/bb8.gif");
@@ -38,6 +40,7 @@ class Game {
     background(this.backgroundImage); //!
     if (frameCount % 4 === 0) {
       this.checkSeeds();
+      // this.checkEnemies();
     }
     // this.player.drawPlayer();
     if (frameCount % 100 === 0) {
@@ -60,6 +63,7 @@ class Game {
     //     return true;
     //   }
     // });
+
     // * SCORE * //
     score = this.hamster.width - 44; //tba -50 instead of 44
     strokeWeight(0);
@@ -68,8 +72,10 @@ class Game {
     fill(255, 255, 255);
     textSize(25);
     text(`Nom-Score: ${score}`, 20, 45);
+  
     // * Ende Score * ///
-    // define the obstacle drawing logic + add a new obstacle to  the array in the constructor with the image passed into it
+
+  
   } // End of game.draw()
   makeSeeds() {
     console.log("this would be a seed")
@@ -82,38 +88,100 @@ class Game {
     }
   } //end makeSeeds()
   makeEnemies() {
-    console.log("this would be a seed")
-    if (enemies.length < 4) {
-      let enemy = createSprite(Math.round(random(width)), Math.round(random(height)), 50, 50);
+    // console.log("this would be a seed")
+    // if (this.enemies.length < 4) {
+      let randomFoxSize =  Math.round(random(150,250));
+      console.log("randomFoxSize A", randomFoxSize);
+      let enemy = createSprite(Math.round(random(width)), Math.round(random(height)), randomFoxSize,randomFoxSize);
       enemy.addImage(this.foxImage);
-      enemies.push(enemy);
-      // fruits.push()(createSprite(mouseX, mouseY, 30, 30)); 
+      console.log("randomFoxSize B", randomFoxSize);
+      enemy.height = randomFoxSize;
+      enemy.width = randomFoxSize;
+      this.foxImage.resize(randomFoxSize,randomFoxSize); 
+      this.enemies.push(enemy);
+      if (this.enemies.length > 4) {
+        console.log("enemies.length:", this.enemies.length);
+        this.enemies.splice(-1,1);
+        console.log("enemies.length after splice:", this.enemies.length);
     }
+      // fruits.push()(createSprite(mouseX, mouseY, 30, 30)); 
+    // }
   } //end makeSeeds()
 
   checkSeeds() {
     fruits = fruits.filter((element) => {
       // fruits.forEach((element) => {
-        console.log("this is the checkSeed", element)
-        if (this.hamster.collide(element)) {
-          console.log("it's collided");
-          // adjust hamster size
-          // tbd: put in external function
-          let areaSqrt = (Math.round(Math.sqrt((element.width * element.height) + (this.hamster.width * this.hamster.height))));
-          this.hamster.height = areaSqrt;
-          this.hamster.width = this.hamster.height;
-          this.hamsterImage50.resize(this.hamster.height, this.hamster.width)
-          console.log("new area sqrt", areaSqrt);
-          element.remove();
-          return false;
-          
-        } else {
-          console.log("it didn't collide");
-          return true;
-        }
+      // console.log("this is the checkSeed", element)
+      if (this.hamster.collide(element)) {
+        console.log("it's collided");
+        // adjust hamster size
+        // tbd: put in external function
+        let areaSqrt = (Math.round(Math.sqrt((element.width * element.height) + (this.hamster.width * this.hamster.height))));
+        this.hamster.height = areaSqrt;
+        this.hamster.width = this.hamster.height;
+        this.hamsterImage50.resize(this.hamster.height, this.hamster.width)
+        console.log("new area sqrt", areaSqrt);
+        element.remove();
+        return false;
+
+      } else {
+        console.log("it didn't collide");
+        return true;
+      }
       // }) // end fruits.end forEach
     })
   } // end check checkSeeds()
+
+  // checkEnemies() {
+
+    // console.log("randomFoxSize checkEnemies", this.randomFoxSize);
+    // enemies = enemies.filter((element) => {
+    //   // fruits.forEach((element) => {
+    //   console.log("this is the checkSeed", element)
+    //   if (this.hamster.collide(element)) {
+    //     console.log("hamster collided with enemy");
+    //     // if hamster < fox
+    //     if (this.hamster.height < element.height) {
+    //       console.log("The hamster was too tiny!")
+    //       this.lose();
+    //       return true;
+    //     } else if (this.hamster.height >= element.height) {
+    //       console.log("The hamster will eat you now!");
+    //               // compareSize(this,hamster, element);
+    //       // let areaSqrt = (Math.round(Math.sqrt((element.width * element.height) + (this.hamster.width * this.hamster.height))));
+    //       // this.hamster.height = areaSqrt;
+    //       // this.hamster.width = this.hamster.height;
+    //       // this.hamsterImage50.resize(this.hamster.height, this.hamster.width)
+    //       // console.log("new area sqrt", areaSqrt);
+    //       element.remove();
+    //       return false;
+    //     } else {
+    //       console.log(this.hamster.height);
+    //       console.log(element.height);
+    //       console.log("This shouldn't happen in the fox/hamster collision")
+    //       return true;
+    //     }
+
+
+    //   } else {
+    //     console.log("it didn't collide");
+    //     return true;
+    //   }
+    //   // }) // end enemies.end forEach
+    // })
+  // } // end check checkEnemies()
+
+  // * WIN & LOSE*
+  // tbd: add pop-up
+  // win () {
+  //   if (this.hamster.width > 400) {
+  //   console.log("You've won! Go on and nom some more!"); 
+  //   }
+  // }
+  lose() {
+    // if (hamster collided with enemy)
+    console.log("Oh noes, that was scaryy! And so close! You run away and leave all your seeds behind.")
+  }
 } // end of draw
 
 
