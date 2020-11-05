@@ -5,11 +5,11 @@ class Game {
   constructor() {}
   preloadGame() {
     console.log("this is the game preload");
-    this.playerImage = loadImage("./assets/player/bb8.gif");
-    this.coinImage = loadImage("../assets/coins/tile000.png");
-    this.backgroundImage = loadImage("../assets/farm3.png");
-    this.seedImage = loadImage("../assets/seed-50x50.png")
-    this.hamsterImage50 = loadImage("../assets/hamster-gray-50.png");
+    this.playerImage = loadImage("/assets/player/bb8.gif");
+    this.coinImage = loadImage("./assets/coins/tile000.png");
+    this.backgroundImage = loadImage("./assets/farm3.png");
+    this.seedImage = loadImage("./assets/seed-50x50.png")
+    this.hamsterImage50 = loadImage("./assets/hamster-gray-50.png");
   }
   setupGame() {
     console.log("this is the game setup");
