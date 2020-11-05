@@ -1,4 +1,5 @@
 let fruits = [];
+let enemies = [];
 let score = 0;
 // let seeds;
 // let enemies;
@@ -10,7 +11,8 @@ class Game {
     this.playerImage = loadImage("./assets/player/bb8.gif");
     this.coinImage = loadImage("./assets/coins/tile000.png");
     this.backgroundImage = loadImage("./assets/farm3.png");
-    this.seedImage = loadImage("./assets/seed-50x50.png")
+    this.seedImage = loadImage("./assets/seed-50x50.png");
+    this.foxImage = loadImage("./assets/fox-50x50.png");
     this.hamsterImage50 = loadImage("./assets/hamster-gray-50.png");
   }
   setupGame() {
@@ -34,25 +36,30 @@ class Game {
   drawGame() {
     // console.log("this is the game draw");
     background(this.backgroundImage); //!
-    this.player.drawPlayer();
-    if (frameCount % 80 === 0) {
-      console.log("this will be the push event");
-      this.obstacles.push(new Obstacle(this.coinImage));
-      this.makeSeeds();
+    if (frameCount % 4 === 0) {
       this.checkSeeds();
     }
+    // this.player.drawPlayer();
+    if (frameCount % 100 === 0) {
+      // console.log("this will be the push event");
+      // this.obstacles.push(new Obstacle(this.coinImage));
+      this.makeSeeds();
+    }
+    if (frameCount % 120 === 0) {
+      this.makeEnemies();
+    }
 
-    this.obstacles.forEach(function (obstacle) {
-      obstacle.drawObstacle();
-    });
+    // this.obstacles.forEach(function (obstacle) {
+    //   obstacle.drawObstacle();
+    // });
     //  call the draw functions for the player + the background
-    this.obstacles = this.obstacles.filter((obstacle) => {
-      if (obstacle.collision(this.player) || obstacle.x < 0) {
-        return false;
-      } else {
-        return true;
-      }
-    });
+    // this.obstacles = this.obstacles.filter((obstacle) => {
+    //   if (obstacle.collision(this.player) || obstacle.x < 0) {
+    //     return false;
+    //   } else {
+    //     return true;
+    //   }
+    // });
     // * SCORE * //
     score = this.hamster.width - 44; //tba -50 instead of 44
     strokeWeight(0);
@@ -66,11 +73,20 @@ class Game {
   } // End of game.draw()
   makeSeeds() {
     console.log("this would be a seed")
-    if (fruits.length < 4) {
+    if (fruits.length < 9) {
       let fruit = createSprite(Math.round(random(width)), Math.round(random(height)), 50, 50);
       fruit.bonus = 22;
       fruit.addImage(this.seedImage);
       fruits.push(fruit);
+      // fruits.push()(createSprite(mouseX, mouseY, 30, 30)); 
+    }
+  } //end makeSeeds()
+  makeEnemies() {
+    console.log("this would be a seed")
+    if (enemies.length < 4) {
+      let enemy = createSprite(Math.round(random(width)), Math.round(random(height)), 50, 50);
+      enemy.addImage(this.foxImage);
+      enemies.push(enemy);
       // fruits.push()(createSprite(mouseX, mouseY, 30, 30)); 
     }
   } //end makeSeeds()
