@@ -89,21 +89,24 @@ class Game {
   } //end makeSeeds()
   makeEnemies() {
     // console.log("this would be a seed")
-    // if (this.enemies.length < 4) {
-      let randomFoxSize =  Math.round(random(150,250));
-      console.log("randomFoxSize A", randomFoxSize);
-      let enemy = createSprite(Math.round(random(width)), Math.round(random(height)), randomFoxSize,randomFoxSize);
+    if (this.enemies.length < 4) {
+      // let randomFoxSize =  Math.round(random(150,250));
+      // console.log("randomFoxSize A", randomFoxSize);
+      let enemy = createSprite(Math.round(random(width)), Math.round(random(height)), 150,150);
       enemy.addImage(this.foxImage);
-      console.log("randomFoxSize B", randomFoxSize);
-      enemy.height = randomFoxSize;
-      enemy.width = randomFoxSize;
-      this.foxImage.resize(randomFoxSize,randomFoxSize); 
+      // console.log("randomFoxSize B", randomFoxSize);
+      enemy.height = 150;
+      enemy.width = 150;
+      // this.foxImage.resize(randomFoxSize,randomFoxSize); 
       this.enemies.push(enemy);
-      if (this.enemies.length > 4) {
-        console.log("enemies.length:", this.enemies.length);
-        this.enemies.splice(-1,1);
-        console.log("enemies.length after splice:", this.enemies.length);
+      // if (this.enemies.length > 4) {
+      //   console.log("enemies.length:", this.enemies.length);
+      //   this.enemies.splice(-1,1);
+      //   console.log("enemies.length after splice:", this.enemies.length);
+        console.log("array after splice:", this.enemies);
+        // enemy.remove // let's try this
     }
+    // this.enemies.push(enemy);// let's try this
       // fruits.push()(createSprite(mouseX, mouseY, 30, 30)); 
     // }
   } //end makeSeeds()
