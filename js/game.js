@@ -5,7 +5,7 @@ class Game {
   constructor() {}
   preloadGame() {
     console.log("this is the game preload");
-    this.playerImage = loadImage("../assets/player/bb8.gif");
+    this.playerImage = loadImage("./assets/player/bb8.gif");
     this.coinImage = loadImage("../assets/coins/tile000.png");
     this.backgroundImage = loadImage("../assets/farm3.png");
     this.seedImage = loadImage("../assets/seed-50x50.png")
@@ -59,8 +59,8 @@ class Game {
     text(`Nom-Score: ${score}`, 20, 45);
     // * Ende Score * ///
     // define the obstacle drawing logic + add a new obstacle to  the array in the constructor with the image passed into it
-  }
-makeSeeds() {
+  }// End of game.draw()
+  makeSeeds() {
     console.log("this would be a seed")
     if (fruits.length < 4) {
       let fruit = createSprite(mouseX, mouseY, 50, 50); // tbd change to random
@@ -69,22 +69,24 @@ makeSeeds() {
       fruits.push(fruit);
       // fruits.push()(createSprite(mouseX, mouseY, 30, 30)); 
     }
-  }
+  }//end makeSeeds()
 
   checkSeeds() {
     fruits.forEach((element) => {
-      console.log("this is the checkSeed", element)
-      if (this.hamster.collide(element)) {
-        console.log("it's collided")
+        console.log("this is the checkSeed", element)
+        if (this.hamster.collide(element)) {
+          console.log("it's collided");
+          // adjust hamster size
+          // tbd: put in external function
+         console.log("element.width", element.width,element.height);
+          console.log("game.hamster.width+=", Math.sqrt((element.width*element.height)+(this.hamster.width*this.hamster.height)));
+        } else {
+          console.log("it didn't collide");
+        }
+
       }
-      else {
-        console.log("it didn't collide");
-      }
-    
-    }
-    
     )
-  }
+  } // end check checkSeeds()
 } // end of draw
 // // !!! 
 // tbd: put this all into a filter 
@@ -125,4 +127,20 @@ makeSeeds() {
 // loose () {
 //   if (hamster collided with enemy)
 //   console.log("Oh noes, that was scaryy! And so close! You run away and leave all your seeds behind.")
+// }
+
+// falls was kaputt geht nochmal der loop. er muss ausserhalb der draw! 
+// checkSeeds() {
+//   fruits.forEach((element) => {
+//     console.log("this is the checkSeed", element)
+//     if (this.hamster.collide(element)) {
+//       console.log("it's collided")
+//     }
+//     else {
+//       console.log("it didn't collide");
+//     }
+
+//   }
+
+//   )
 // }
