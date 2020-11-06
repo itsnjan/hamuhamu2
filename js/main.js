@@ -24,6 +24,7 @@ update();
 function update() {
   if (game.winning) {
     console.log("you win!!!");
+    image(game.goldhamsterImage, 0, 0);
     frameRate(0);
   }
 }

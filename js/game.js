@@ -12,6 +12,7 @@ class Game {
     console.log("this is the game preload");
     this.playerImage = loadImage("./assets/player/bb8.gif");
     this.coinImage = loadImage("./assets/coins/tile000.png");
+    this.goldhamsterImage = loadImage("./assets/goldhamster.jpg");
     this.backgroundImage = loadImage("./assets/farm3.png");
     this.seedImage = loadImage("./assets/seed-50x50.png");
     this.foxImage = loadImage("./assets/fox-50x50.png");
