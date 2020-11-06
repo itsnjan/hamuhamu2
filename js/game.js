@@ -66,7 +66,7 @@ this.winning = false;
     // });
 
     // * SCORE * //
-    score = this.hamster.width - 44; //tba -50 instead of 44
+    score = this.hamster.width - 50;
     strokeWeight(0);
     fill("#233C2B");
     rect(12, 12, 200, 50, 10, 10, 10, 10);
