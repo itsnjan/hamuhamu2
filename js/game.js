@@ -77,6 +77,7 @@ class Game {
       // console.log("randomFoxSize B", randomFoxSize);
       enemy.height = 150;
       enemy.width = 150;
+      enemy.setSpeed(1.5, random(0,361));
       // this.foxImage.resize(randomFoxSize,randomFoxSize); 
       this.enemies.push(enemy);
       // if (this.enemies.length > 4) {
