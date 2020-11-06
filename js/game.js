@@ -36,7 +36,7 @@ class Game {
       this.checkSeeds();
       // this.checkEnemies();
     }
-    if (frameCount % 100 === 0) {
+    if (frameCount % Math.round(random(33,181)) === 0) {
       // console.log("this will be the push event");
       this.makeSeeds();
     }
