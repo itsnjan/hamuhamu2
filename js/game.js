@@ -123,7 +123,13 @@ class Game {
     console.log("Oh noes, that was scaryy! And so close! You run away and leave all your seeds behind.")
   }
 
-
+increaseHamsterSize(element) {
+  let areaSqrt = (Math.round(Math.sqrt((element.width * element.height) + (this.hamster.width * this.hamster.height))));
+  this.hamster.height = areaSqrt;
+  this.hamster.width = this.hamster.height;
+  this.hamsterImage50.resize(this.hamster.height, this.hamster.width)
+  console.log("new area sqrt", areaSqrt);
+}
 
 checkEnemies() {
   this.enemies = this.enemies.filter((element) => {
@@ -131,7 +137,13 @@ checkEnemies() {
     if (this.hamster.collide(element)) {
       console.log("Hamster mit Gegner kollidiert");
       // // if hamster < fox
-      // if (this.hamster.height )
+      if (this.hamster.height > element.height) {
+        this.increaseHamsterSize(element);
+        console.log("The hamster eats the enemy");
+      }
+      else if (this.hamster.height < element.height)
+      // hamster loses
+      console.log("The hamster flees!");
       element.remove();
       return false
     }
