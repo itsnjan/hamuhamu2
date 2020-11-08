@@ -34,6 +34,7 @@ class Game {
     background(this.backgroundImage); //!
     if (frameCount % 4 === 0) {
       this.checkSeeds();
+      this.checkEnemies();
       // this.checkEnemies();
     }
     if (frameCount % Math.round(random(33,181)) === 0) {
@@ -121,8 +122,26 @@ class Game {
     // if (hamster collided with enemy)
     console.log("Oh noes, that was scaryy! And so close! You run away and leave all your seeds behind.")
   }
-} // end of draw
 
+
+
+checkEnemies() {
+  this.enemies = this.enemies.filter((element) => {
+    console.log("This is the checkEnemies");
+    if (this.hamster.collide(element)) {
+      console.log("Hamster mit Gegner kollidiert");
+      // // if hamster < fox
+      // if (this.hamster.height )
+      element.remove();
+      return false
+    }
+    else {
+      return true
+    }
+  })
+} // end of checkEnemies()
+
+} // end of draw
   // checkEnemies() {
 
   // console.log("randomFoxSize checkEnemies", this.randomFoxSize);
